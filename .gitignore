@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Reports (generated)
+reports/
+output/
+
+# Config with potential secrets
+.env
+*.env
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Wordlists (large, user-provided)
+config/wordlists/*.txt
+!config/wordlists/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,4 @@
+# PHANTOM — Core Dependencies
+# Pure Python3 stdlib used wherever possible.
+# Only requests is required for HTTP operations.
+requests>=2.28.0
