@@ -1,13 +1,4 @@
-"""
-PHANTOM — HTTP Client Wrapper
-
-Thin wrapper around `requests` with:
-- User-agent rotation
-- Proxy support (HTTP/HTTPS/SOCKS5)
-- Rate limiting
-- Retry with backoff
-- Response analysis helpers
-"""
+"""PHANTOM — HTTP Client Wrapper"""
 from __future__ import annotations
 import random
 import time

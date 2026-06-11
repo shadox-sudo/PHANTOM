@@ -1,7 +1,4 @@
-"""
-PHANTOM — Google Dork Generator Module
-Generates Google dork queries for the target. NO actual Google searching.
-"""
+"""PHANTOM — Google dork generator. Generates queries, does NOT auto-search."""
 from urllib.parse import quote
 
 

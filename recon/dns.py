@@ -1,7 +1,4 @@
-"""
-PHANTOM — DNS Reconnaissance Module
-WHOIS lookup, DNS records, subdomain enumeration via crt.sh + wordlist brute force.
-"""
+"""PHANTOM — DNS recon: WHOIS, DNS records, crt.sh + wordlist subdomain enum."""
 import json
 import socket
 import threading
@@ -67,10 +64,8 @@ class DNSRecon:
                                  f"{len(self.target.subdomains)} subdomains")
         print(f"  [*] DNS recon done: {len(self.target.subdomains)} total subdomains")
 
-    # ── WHOIS ──────────────────────────────────────────────────────────
-
     def _whois_lookup(self, domain: str) -> dict:
-        """WHOIS lookup via raw socket to IANA/ARIN whois servers."""
+        """WHOIS via raw socket to IANA/ARIN."""
         result = {}
         servers = ["whois.iana.org", "whois.arin.net"]
 
@@ -107,10 +102,8 @@ class DNSRecon:
 
         return result
 
-    # ── DNS Records ────────────────────────────────────────────────────
-
     def _dns_records(self, domain: str) -> dict:
-        """Fetch common DNS record types using stdlib socket."""
+        """Fetch A + AAAA records."""
         records = {}
 
         a_recs = self._resolve_a(domain)
@@ -155,10 +148,8 @@ class DNSRecon:
         except socket.gaierror:
             return ""
 
-    # ── crt.sh Subdomain Enumeration ───────────────────────────────────
-
     def _crt_sh(self, domain: str) -> set:
-        """Query Certificate Transparency log via crt.sh API."""
+        """crt.sh certificate transparency lookup."""
         subs: set = set()
         try:
             import urllib.request
@@ -182,10 +173,8 @@ class DNSRecon:
             pass
         return subs
 
-    # ── Wordlist Subdomain Brute Force ─────────────────────────────────
-
     def _brute_subdomains(self, domain: str) -> set:
-        """Brute-force subdomains from wordlist. Threaded."""
+        """Threaded subdomain brute-force."""
         found: set = set()
         lock = threading.Lock()
         words = self._load_subdomain_wordlist()
@@ -209,7 +198,7 @@ class DNSRecon:
         return found
 
     def _load_subdomain_wordlist(self) -> list:
-        """Load subdomain wordlist from file or use built-in."""
+        """Load wordlist from file or fall back to built-in."""
         path = f"{self.config.wordlist_dir}/subdomains.txt"
         try:
             with open(path) as f:

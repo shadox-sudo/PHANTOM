@@ -1,3 +1,4 @@
+"""PHANTOM — Target data model + serialization."""
 import json
 from dataclasses import dataclass, field, asdict
 from typing import Optional

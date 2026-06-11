@@ -1,9 +1,4 @@
-"""
-PHANTOM — Cryptographic and Encoding Utilities
-
-Pure Python implementations for JWT decoding, hashing, random generation.
-No external crypto dependencies required.
-"""
+"""PHANTOM — Cryptographic and Encoding Utilities"""
 import base64
 import hashlib
 import hmac

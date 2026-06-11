@@ -1,12 +1,4 @@
-"""
-PHANTOM — Live Status Display
-
-Shows animated spinner, current task, elapsed time, and running results
-count so the user always knows something is happening.
-
-Thread-safe: uses a lock to prevent garbled output when modules print
-while the spinner is running.
-"""
+"""PHANTOM — Live status spinner. Thread-safe."""
 
 import sys
 import threading
@@ -25,7 +17,7 @@ _print_lock = threading.Lock()
 
 
 def safe_print(*args, **kwargs):
-    """Thread-safe print that clears spinner line first."""
+    """Thread-safe print — clears spinner line first."""
     with _print_lock:
         if sys.stdout.isatty():
             sys.stdout.write("\r" + " " * 80 + "\r")
@@ -34,13 +26,7 @@ def safe_print(*args, **kwargs):
 
 
 class LiveStatus:
-    """Animated status line with spinner, task name, elapsed time, and counter.
-
-    Thread-safe. Use as context manager:
-        with LiveStatus("Scanning ports") as s:
-            s.update("Scanning port 80...")
-            s.count(5)
-    """
+    """Context manager: shows animated spinner + task name + counter."""
 
     SPINNER = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 
@@ -105,7 +91,7 @@ def print_banner():
 ██      ██   ██ ██   ██ ██   ████    ██     ██████  ██      ██
 {C.RST}
 {C.DIM}  Autonomous Pentest Framework ~ Recon \u2192 Vuln \u2192 Exploit \u2192 Report{C.RST}
-{C.DIM}  v1.0.0 — Built by Shadow for Musawir{C.RST}
+{C.DIM}  v1.0.0 — Built by SHADOX{C.RST}
 """
     sys.stdout.write(b)
 

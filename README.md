@@ -52,7 +52,7 @@ This is NOT a script-kiddie button. It does not auto-exploit or drop shells. Eve
 ## Requirements
 
 - Python 3.10+
-- `requests` library (only non-stdlib dependency)
+- `requests`, `dnspython` (only non-stdlib deps)
 - No AI. No bloated dependencies. No nonsense.
 
 ## Live Status

@@ -1,9 +1,4 @@
-"""
-PHANTOM — HTML Report Generator
-
-Builds comprehensive HTML reports from target and report data.
-Pure HTML output — no JavaScript dependencies.
-"""
+"""PHANTOM — HTML Report Generator"""
 from __future__ import annotations
 import json
 import logging

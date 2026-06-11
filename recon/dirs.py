@@ -1,7 +1,5 @@
-"""
-PHANTOM — Directory Brute-Forcer Module
-Discovers hidden paths on web servers using threaded HTTP GET requests.
-"""
+"""PHANTOM — Directory brute-forcer. Threaded HTTP GET discovery."""
+import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from utils.http_client import request
@@ -75,7 +73,6 @@ class DirBrute:
         threads = min(self.config.threads, len(wordlist))
         found = []
         lock = threading.Lock()
-        import threading
 
         def check_path(path: str):
             url = f"{base_url.rstrip('/')}/{path.lstrip('/')}"
@@ -111,7 +108,7 @@ class DirBrute:
         print(f"  [*] Directory brute-force done: {len(found)} paths discovered")
 
     def _get_base_url(self) -> str:
-        """Build a base URL from target data."""
+        """Build base URL from target ports or fallback to domain."""
         domain = self.target.domain
 
         # Use IP with port from first web port if available
@@ -128,7 +125,7 @@ class DirBrute:
         return f"https://{domain}/"
 
     def _load_wordlist(self) -> list:
-        """Load wordlist from file or use built-in."""
+        """Load wordlist or fall back to built-in."""
         path = f"{self.config.wordlist_dir}/dirs.txt"
         try:
             with open(path) as f:

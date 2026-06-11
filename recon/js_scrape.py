@@ -1,7 +1,4 @@
-"""
-PHANTOM — JavaScript Scraper Module
-Extracts <script> URLs from pages, downloads JS files, hunts for endpoints & secrets.
-"""
+"""PHANTOM — JS scraper: extract endpoints + secrets from JavaScript."""
 import re
 from urllib.parse import urljoin
 
@@ -136,7 +133,7 @@ class JSScraper:
                 print(f"      [{s['type']}] {s['match'][:80]}")
 
     def _get_target_urls(self) -> list:
-        """Build list of URLs to fetch for JS extraction."""
+        """Build URLs from target ports."""
         urls = []
         domain = self.target.domain
 
@@ -156,7 +153,7 @@ class JSScraper:
         return urls
 
     def _extract_js_urls(self, page_url: str) -> set:
-        """Fetch a page and extract all <script src='...'> URLs."""
+        """Extract script src URLs from HTML page."""
         js_urls = set()
         try:
             resp = request(
@@ -196,7 +193,7 @@ class JSScraper:
         return js_urls
 
     def _scan_js_file(self, js_url: str) -> tuple:
-        """Download a JS file and scan for endpoints and secrets."""
+        """Scan JS file for endpoints + secrets."""
         endpoints = []
         secrets = []
         try:

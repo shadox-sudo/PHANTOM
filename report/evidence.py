@@ -1,11 +1,4 @@
-"""
-PHANTOM — Evidence Collector
-
-Saves response bodies, text-based screenshots, and raw data as evidence
-files organized under reports/evidence/<domain>/.
-
-All evidence is timestamped and labeled for traceability.
-"""
+"""PHANTOM — Evidence Collector"""
 from __future__ import annotations
 import logging
 import os

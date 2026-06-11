@@ -1,16 +1,4 @@
-"""
-PHANTOM — HTML Report Generator
-
-Generates a dark-themed, professional HTML security report with:
-  - Target info header (domain, IP, scan date, duration)
-  - Stats grid (total findings, by severity, by phase)
-  - Timeline (chronological list of actions)
-  - Vulnerability cards (color-coded by severity)
-  - Recon results (ports, tech stack, subdomains, dirs, JS endpoints)
-  - Exploit commands section (if any)
-
-Inline CSS — zero external dependencies.
-"""
+"""PHANTOM — HTML Report Generator"""
 from __future__ import annotations
 import logging
 import os

@@ -1,3 +1,4 @@
+"""PHANTOM — Pipeline engine. Orchestrates recon → vuln → exploit → report."""
 import sys
 import os
 import importlib
@@ -12,6 +13,7 @@ from utils.status import LiveStatus, C
 
 
 class PhaseResult:
+    """Stores outcome of a single pipeline phase."""
     def __init__(self, phase: str, success: bool, data=None):
         self.phase = phase
         self.success = success
@@ -65,6 +67,9 @@ class PhantomEngine:
         if self.config.recon_dorks:
             from recon.dorks import DorkGen
             modules.append(DorkGen(self))
+        if self.config.recon_takeover:
+            from recon.takeover import SubdomainTakeover
+            modules.append(SubdomainTakeover(self))
 
         total = len(modules)
         for i, mod in enumerate(modules, 1):

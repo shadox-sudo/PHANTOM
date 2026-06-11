@@ -1,3 +1,4 @@
+"""PHANTOM — Central config: CLI args + env vars + JSON import."""
 import os
 import json
 from dataclasses import dataclass, field
@@ -24,6 +25,7 @@ class PhantomConfig:
     recon_dirs: bool = True
     recon_js: bool = True
     recon_dorks: bool = True
+    recon_takeover: bool = True
 
     vuln_sqli: bool = True
     vuln_xss: bool = True

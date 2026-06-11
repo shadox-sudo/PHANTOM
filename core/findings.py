@@ -1,3 +1,4 @@
+"""PHANTOM — Findings database: store, sort, query vuln results."""
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional

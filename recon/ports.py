@@ -1,7 +1,4 @@
-"""
-PHANTOM — TCP Port Scanner Module
-Multithreaded TCP connect scan with banner grabbing.
-"""
+"""PHANTOM — Multithreaded TCP port scanner with banner grab."""
 import socket
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -147,7 +144,7 @@ class PortScanner:
             return False
 
     def _grab_banner(self, sock: socket.socket, port: int) -> str:
-        """Attempt to grab a service banner from an open socket."""
+        """Grab banner from open socket."""
         try:
             sock.settimeout(3)
             if port in (80, 8080, 8000, 8888, 8081):
@@ -169,7 +166,7 @@ class PortScanner:
             return ""
 
     def _detect_service(self, port: int, banner: str) -> str:
-        """Detect service by port number or banner."""
+        """Map port + banner to service name."""
         common = {
             21: "ftp", 22: "ssh", 23: "telnet", 25: "smtp",
             53: "dns", 80: "http", 81: "http", 110: "pop3",

@@ -1,7 +1,4 @@
-"""
-PHANTOM — Technology Detection Module
-Identifies web servers, CMS, frameworks, libraries from HTTP responses.
-"""
+"""PHANTOM — Web tech detection via HTTP headers + HTML fingerprints."""
 import re
 from urllib.parse import urljoin
 

@@ -1,8 +1,4 @@
-"""
-PHANTOM — Network Utility Functions
-
-Pure socket-based helpers with no external dependencies.
-"""
+"""PHANTOM — Network Utility Functions"""
 import socket
 import struct
 from typing import Optional

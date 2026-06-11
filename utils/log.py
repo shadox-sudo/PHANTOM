@@ -1,8 +1,4 @@
-"""
-PHANTOM — Logging Setup
-
-Provides colored console logging and optional file logging.
-"""
+"""PHANTOM — Logging Setup"""
 import logging
 import sys
 from typing import Optional

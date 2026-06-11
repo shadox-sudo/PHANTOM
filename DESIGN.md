@@ -940,7 +940,7 @@ INPUT: domain or URL
 │                                                          │
 │  EvidenceCollector captures proof                         │
 │  ReportGenerator builds HTML                             │
-│  → /home/musawir/my_projects/PHANTOM/output/report_*.html│
+│  → ./output/report_*.html                                 │
 │                                                          │
 │  TelegramBot.send_report_summary(report)                 │
 │    → sends executive summary to Telegram                 │
@@ -1040,7 +1040,7 @@ Users can also point to external directories via config:
 
 ```toml
 [plugins]
-directory = "/home/musawir/custom_phantom_plugins"
+directory = "/opt/phantom_plugins"
 auto_load = true
 ```
 

@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""
-PHANTOM — Autonomous Penetration Testing Framework
-Pipeline: Recon -> Vulnerability Detection -> Exploit -> Report
-
-Usage:
-  python phantom.py example.com
-  python phantom.py example.com --phase recon --threads 50
-  python phantom.py example.com --proxy socks5://127.0.0.1:9050
-  python phantom.py example.com --phase vuln --import target.json
-"""
+"""PHANTOM — Autonomous pentest framework: recon → vuln → exploit → report."""
 
 import sys
 import os
@@ -41,7 +32,7 @@ def build_parser():
     p.add_argument("--telegram-token", metavar="TOKEN")
     p.add_argument("--telegram-chat-id", metavar="ID")
 
-    for flag in ("dns","ports","tech","dirs","js","dorks"):
+    for flag in ("dns","ports","tech","dirs","js","dorks","takeover"):
         p.add_argument(f"--no-{flag}", action="store_true", help=f"Skip {flag}")
     for flag in ("sqli","xss","lfi","ssrf","redirect","idor","jwt","cors","rate-limit","default-creds","cve"):
         p.add_argument(f"--no-{flag}", action="store_true", help=f"Skip {flag}")
@@ -66,6 +57,7 @@ def build_config(args):
     c.recon_dns = not args.no_dns; c.recon_ports = not args.no_ports
     c.recon_tech = not args.no_tech; c.recon_dirs = not args.no_dirs
     c.recon_js = not args.no_js; c.recon_dorks = not args.no_dorks
+    c.recon_takeover = not args.no_takeover
     c.vuln_sqli = not args.no_sqli; c.vuln_xss = not args.no_xss
     c.vuln_lfi = not args.no_lfi; c.vuln_ssrf = not args.no_ssrf
     c.vuln_redirect = not args.no_redirect; c.vuln_idor = not args.no_idor
