@@ -113,6 +113,10 @@ class TechDetect:
         if server:
             self._add_tech("Web Server", server, 100)
 
+        # Known host services (Server header + IP based)
+        host = url.split("://")[1].split(":")[0].rstrip("/") if "://" in url else ""
+        self._detect_host_service(headers, server, host)
+
         # Known header patterns
         self._check_headers(headers)
 
@@ -240,6 +244,47 @@ class TechDetect:
         for regex, tech, ctx in libs:
             if re.search(regex, body, re.I):
                 self._add_tech(tech, ctx, 75)
+
+    def _detect_host_service(self, headers: dict, server: str, host: str):
+        """Detect hosting platform from server header + IP."""
+        # GitHub Pages — Server: GitHub.com with GitHub Pages IPs
+        if "github.com" in server.lower():
+            if host:
+                import socket
+                try:
+                    ip = socket.gethostbyname(host)
+                    # GitHub Pages IP range: 185.199.108.0/22
+                    parts = ip.split(".")
+                    if parts[0] == "185" and parts[1] == "199" and 108 <= int(parts[2]) <= 111:
+                        self._add_tech("GitHub Pages", "static site hosting", 95)
+                except Exception:
+                    self._add_tech("GitHub.com (maybe Pages)", server, 80)
+            else:
+                self._add_tech("GitHub.com (maybe Pages)", server, 80)
+
+        # Cloudflare Pages
+        if server.lower() == "cloudflare":
+            self._add_tech("Cloudflare Pages", "server header", 80)
+
+        # Vercel
+        if "vercel" in server.lower() or "x-vercel-id" in headers:
+            self._add_tech("Vercel", "serverless hosting", 90)
+
+        # Netlify
+        if "netlify" in server.lower():
+            self._add_tech("Netlify", "static hosting", 90)
+
+        # Render
+        if "render" in server.lower():
+            self._add_tech("Render", "cloud hosting", 85)
+
+        # Fly.io
+        if "fly" in server.lower():
+            self._add_tech("Fly.io", "edge hosting", 80)
+
+        # Firebase Hosting
+        if "firebase" in server.lower():
+            self._add_tech("Firebase Hosting", "Google hosting", 90)
 
     def _add_tech(self, name: str, version: str, certainty: int):
         """Add a technology to the target's tech stack."""
