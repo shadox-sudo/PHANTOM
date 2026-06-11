@@ -81,8 +81,11 @@ class TechDetect:
             for p in self.target.ports:
                 if p.state == "open" and p.port in (80, 443, 8080, 8443, 8000, 8888):
                     scheme = "https" if p.port in (443, 8443) else "http"
-                    ip = self.target.ip or domain
-                    urls.append(f"{scheme}://{ip}:{p.port}/")
+                    # Use domain, not IP — virtual hosting breaks by-IP requests
+                    if p.port in (80, 443):
+                        urls.append(f"{scheme}://{domain}/")
+                    else:
+                        urls.append(f"{scheme}://{domain}:{p.port}/")
         if not urls:
             urls = [f"https://{domain}/", f"http://{domain}/"]
 

@@ -141,11 +141,11 @@ class JSScraper:
             for p in self.target.ports:
                 if p.state == "open" and p.port in (80, 443, 8080, 8443):
                     scheme = "https" if p.port in (443, 8443) else "http"
-                    ip = self.target.ip or domain
+                    # Use domain name, not IP — virtual hosts won't work by IP
                     if p.port in (80, 443):
-                        urls.append(f"{scheme}://{ip}/")
+                        urls.append(f"{scheme}://{domain}/")
                     else:
-                        urls.append(f"{scheme}://{ip}:{p.port}/")
+                        urls.append(f"{scheme}://{domain}:{p.port}/")
 
         if not urls:
             urls = [f"https://{domain}/", f"http://{domain}/"]
